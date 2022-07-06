@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require "sinatra/content_for"
 require "tilt/erubis"
 
-require_relative "session_persistence"
+require_relative session_persistence
 
 configure do
   enable :sessions
@@ -41,6 +41,14 @@ helpers do
     incomplete_todos.each(&block)
     complete_todos.each(&block)
   end
+end
+
+def load_list(id)
+  list = @storage.find_list(id)
+  return list if list
+
+  session[:error] = "The specified list was not found."
+  redirect "/lists"
 end
 
 # Return an error message if the name is invalid. Return nil if name is valid.

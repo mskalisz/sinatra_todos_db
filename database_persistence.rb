@@ -57,11 +57,3 @@ class DatabasePersistence
     max + 1
   end
 end
-
-def load_list(id)
-  list = @storage.find_list(id)
-  return list if list
-
-  session[:error] = "The specified list was not found."
-  redirect "/lists"
-end
