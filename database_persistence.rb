@@ -16,6 +16,7 @@ class DatabasePersistence
 
   def all_lists
     sql = "SELECT * FROM lists;"
+    puts sql
     result = @db.exec(sql)
     
     result.map do |tuple|
