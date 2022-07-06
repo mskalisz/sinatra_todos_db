@@ -10,7 +10,12 @@ class DatabasePersistence
   end
 
   def all_lists
-    # @session[:lists]
+    sql = "SELECT * FROM lists;"
+    result = @db.exec(sql)
+    
+    result.map do |tuple|
+      {id: tuple["id"], name: tuple["name"], todos: []}
+    end
   end
 
   def create_new_list(list_name)
