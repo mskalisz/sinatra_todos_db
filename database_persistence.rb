@@ -12,8 +12,7 @@ class DatabasePersistence
 
   def find_list(id)
     sql = "SELECT * FROM lists WHERE id = $1"
-    puts "#{sql}: #{id}"
-    result = @db.exec_params(sql, [id])
+    result = query(sql, id)
 
     tuple = result.first
     {id: tuple["id"], name: tuple["name"], todos: []}
@@ -21,8 +20,7 @@ class DatabasePersistence
 
   def all_lists
     sql = "SELECT * FROM lists;"
-    puts sql
-    result = @db.exec(sql)
+    result = query(sql)
     
     result.map do |tuple|
       {id: tuple["id"], name: tuple["name"], todos: []}
