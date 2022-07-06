@@ -5,6 +5,11 @@ class DatabasePersistence
     @db = PG.connect(dbname: "todos")
   end
 
+  def query(statement, *params)
+    puts "#{statement}}: #{params}"
+    @db.exec_params(statement, params)
+  end
+
   def find_list(id)
     sql = "SELECT * FROM lists WHERE id = $1"
     puts "#{sql}: #{id}"
