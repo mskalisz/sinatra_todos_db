@@ -7,6 +7,7 @@ class DatabasePersistence
 
   def find_list(id)
     sql = "SELECT * FROM lists WHERE id = $1"
+    puts "#{sql}: #{id}"
     result = @db.exec_params(sql, [id])
 
     tuple = result.first
