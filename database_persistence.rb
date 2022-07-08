@@ -63,10 +63,8 @@ class DatabasePersistence
   end
 
   def mark_all_todos_as_completed(list_id)
-    # list = find_list(list_id)
-    # list[:todos].each do |todo|
-    #   todo[:completed] = true
-    # end
+    sql = "UPDATE todos SET completed = true WHERE list_id = $1;"
+    query(sql, list_id)
   end
 
   private
