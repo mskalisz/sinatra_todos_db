@@ -24,7 +24,7 @@ class DatabasePersistence
     result = query(sql)
     
     result.map do |tuple|
-      list_id = tuple["id"]
+      list_id = tuple["id"].to_i
       todo_sql = "SELECT * FROM todos WHERE list_id = $1"
       todos_result = query(todo_sql, list_id)
 
