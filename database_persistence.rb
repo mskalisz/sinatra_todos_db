@@ -29,9 +29,9 @@ class DatabasePersistence
       todos_result = query(todo_sql, list_id)
 
       todos = todos_result.map do |todo_tuple|
-        { id: todo_tuple["id"], 
+        { id: todo_tuple["id"].to_i, 
           name: todo_tuple["name"], 
-          completed: todo_tuple["completed"] }
+          completed: todo_tuple["completed"] == "t" }
       end
 
       {id: list_id, name: tuple["name"], todos: todos}
