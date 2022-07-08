@@ -24,9 +24,29 @@ class DatabasePersistence
     result = query(sql)
     
     result.map do |tuple|
-      {id: tuple["id"], name: tuple["name"], todos: []}
+      list_id = tuple["id"]
+      todo_sql = "SELECT * FROM todos WHERE list_id = $1"
+      todos_result = query(todo_sql, list_id)
+
+      todos = todos_result.map do |todo_tuple|
+        { id: todo_tuple["id"], 
+          name: todo_tuple["name"], 
+          completed: todo_tuple["completed"] }
+      end
+
+      {id: list_id, name: tuple["name"], todos: todos}
     end
   end
+
+  # def find_todos(list_id)
+  #   sql = "SELECT * FROM todos WHERE list_id = $1"
+  #   result = query(sql, list_id)
+
+  #   result.map do |tuple|
+  #     {name: tuple["name"], completed: tuple["completed"]}
+  #   end
+  # end
+
 
   def create_new_list(list_name)
     # id = next_element_id(@session[:lists])
