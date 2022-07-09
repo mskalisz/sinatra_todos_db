@@ -29,11 +29,9 @@ class DatabasePersistence
     result = query(sql, id)
 
     tuple = result.first
-    list_id = tuple["id"].to_i
-    todos = find_todos(list_id)
+
     { id: tuple["id"].to_i,
       name: tuple["name"], 
-      todos: todos,
       todos_count: tuple["todos_count"].to_i,
       todos_remaining_count: tuple["todos_remaining_count"].to_i }
   end
@@ -96,8 +94,6 @@ class DatabasePersistence
   def disconnect
     @db.close
   end
-
-  private
   
   def find_todos(list_id)
     todo_sql = "SELECT * FROM todos WHERE list_id = $1"
