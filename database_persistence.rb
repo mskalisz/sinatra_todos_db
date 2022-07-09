@@ -29,7 +29,7 @@ class DatabasePersistence
     sql = <<~SQL
       SELECT lists.*, 
         COUNT(todos.id) AS todos_count,
-        COUNT(NULLIF(todos.completed, false)) AS todos_remaining
+        COUNT(NULLIF(todos.completed, false)) AS todos_remaining_count
         FROM lists
         LEFT JOIN todos ON todos.list_id = lists.id
         GROUP BY lists.id;
