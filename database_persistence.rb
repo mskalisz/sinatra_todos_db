@@ -32,7 +32,8 @@ class DatabasePersistence
         COUNT(NULLIF(todos.completed, false)) AS todos_remaining_count
         FROM lists
         LEFT JOIN todos ON todos.list_id = lists.id
-        GROUP BY lists.id;
+        GROUP BY lists.id
+        ORDER BY lists.name;
     SQL
     result = query(sql)
     
