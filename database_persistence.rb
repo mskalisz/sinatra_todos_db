@@ -40,7 +40,7 @@ class DatabasePersistence
       { id: tuple["id"].to_i,
         name: tuple["name"], 
         todos_count: tuple["todos_count"].to_i,
-        todos_remaining: tuple["todos_remaining"].to_i }
+        todos_remaining_count: tuple["todos_remaining_count"].to_i }
     end
   end
 
